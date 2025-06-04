@@ -1,0 +1,38 @@
+"""
+B. Anagram?
+
+You are given two strings. You need to check whether one is an anagram of the other.
+An anagram is a string formed by rearranging the letters of another string.
+"""
+
+
+def solve(str1, str2):
+    # Check if the lengths of the two strings are equal
+    if len(str1) != len(str2):
+        return "NO"  # If not, they cannot be anagrams
+    
+    # Create a dictionary to count occurrences of characters in the strings
+    chars = {}
+    for v in zip(str1, str2):  # Iterate over corresponding characters of both strings
+        chars[v[0]] = chars.get(v[0], 0) + 1  # Increment count for character in str1
+        chars[v[1]] = chars.get(v[1], 0) - 1  # Decrement count for character in str2
+            
+    # Check if all characters have the same count in both strings
+    for v in chars.values():
+        if v != 0:
+            return "NO"  # If any character count is not zero, they cannot be anagrams
+    
+    return "YES"  # If all characters have the same count, they are anagrams
+
+
+# Test cases
+assert solve("anagram", "nagaram") == "YES"
+assert solve("anagram", "nagaramm") == "NO"
+assert solve("dusty", "study") == "YES"
+assert solve("rat", "bat") == "NO"
+assert solve("hello", "world") == "NO"
+assert solve("listen", "silent") == "YES"
+assert solve("acts", "cats") == "YES"
+assert solve("weird", "wired") == "YES"
+assert solve("smile", "limes") == "YES"
+assert solve("tea", "eat") == "YES"
