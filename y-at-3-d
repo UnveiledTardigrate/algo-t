@@ -1,0 +1,27 @@
+"""
+D. Repeating Number
+
+You are given a sequence of measurements of a certain value.
+You need to determine whether any number is repeated such that the distance between its occurrences does not exceed k.
+"""
+
+def solve(nums, k):
+    num_index = {}  # Dictionary to store the last index of each number
+    for i, num in enumerate(nums):
+        if num in num_index and i - num_index[num] <= k:
+            return "YES"  # Found a repeating number within distance k
+        num_index[num] = i  # Update the index of the number
+    return "NO"  # No repeating number within distance k found
+
+# Test cases
+assert solve([1, 2, 3, 1], 2) == "NO" 
+assert solve([1, 0, 1, 1], 1) == "YES"
+assert solve([1, 2, 3, 1, 2, 3], 2) == "NO" 
+assert solve([1, 1], 1) == "YES"  
+assert solve([1, 2, 1], 2) == "YES"  
+assert solve([1, 2, 3, 4, 5], 1) == "NO"  
+assert solve([1, 1, 1, 1, 1], 1) == "YES"  
+assert solve([1, 2, 3, 4, 5, 1], 5) == "YES"  
+assert solve([1, 2, 3, 4, 5, 6, 1], 6) == "YES"  
+assert solve([], 1) == "NO"  
+assert solve([1], 1) == "NO"
